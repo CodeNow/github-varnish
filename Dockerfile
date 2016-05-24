@@ -21,5 +21,4 @@ COPY nginx-https-proxy.conf /etc/nginx/sites-available/default
 
 # Expose the port and start the proxies
 EXPOSE 80
-CMD ["sleep", "86400"]
-# CMD ["/start.sh"]
+CMD ["/start.sh"]
