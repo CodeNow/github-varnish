@@ -1,19 +1,24 @@
-FROM ubuntu:12.04
-ENV DEBIAN_FRONTEND noninteractive
+FROM ubuntu:14.04
 
-#RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
-RUN apt-get -qq update
-RUN apt-get install -y varnish vim git
+# Install debug utilities
+RUN apt-get update && apt-get install -y curl vim dnsutils
 
-# Default environment configuration (see start.sh)
-ENV VARNISH_PORT 80
-ENV VARNISH_MALLOC 100M
+# Install and configure nginx
+RUN apt-get update && apt-get install -y nginx
 
-# Add repository defined VCL
-ADD default.vcl /etc/varnish/default.vcl
+# Install and configure varnish
+RUN apt-get -qq update && apt-get install -y varnish vim git
 
+# Add the startup script
 ADD start.sh /start.sh
 RUN chmod 0755 /start.sh
 
+# Set Configurations for varnish and nginx
+ENV VARNISH_PORT 80
+ENV VARNISH_MALLOC 100M
+ADD default.vcl /etc/varnish/default.vcl
+COPY nginx-https-proxy.conf /etc/nginx/sites-available/default
+
+# Expose the port and start the proxies
 EXPOSE 80
-CMD ["/start"]
+CMD ["/start.sh"]
