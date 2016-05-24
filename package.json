@@ -4,6 +4,10 @@
   "description": "Internal varnish proxy for api.github.com",
   "main": "index.js",
   "scripts": {
+    "run": "docker run -d -p 8765:80 'github-varnish:latest'",
+    "kill": "docker ps -a | grep 'github-varnish:latest' | awk '{print $1}' | xargs docker kill && docker ps -a | grep 'github-varnish:latest' | awk '{print $1}' | xargs docker rm",
+    "build": "npm run kill && npm run build-image",
+    "build-image": "docker build -t 'github-varnish:latest' .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
