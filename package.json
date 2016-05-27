@@ -1,0 +1,23 @@
+{
+  "name": "github-varnish",
+  "version": "0.0.0",
+  "description": "Internal varnish proxy for api.github.com",
+  "main": "index.js",
+  "scripts": {
+    "run": "docker run -d -p 8765:80 'github-varnish:latest'",
+    "kill": "docker ps -a | grep 'github-varnish:latest' | awk '{print $1}' | xargs docker kill && docker ps -a | grep 'github-varnish:latest' | awk '{print $1}' | xargs docker rm",
+    "build": "npm run kill && npm run build-image",
+    "build-image": "docker build -t 'github-varnish:latest' .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeNow/github-varnish.git"
+  },
+  "author": "Ryan Sandor Richards <ryan@runnable.com> (http://www.runnable.com/)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/CodeNow/github-varnish/issues"
+  },
+  "homepage": "https://github.com/CodeNow/github-varnish#readme"
+}

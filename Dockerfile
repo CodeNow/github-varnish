@@ -10,14 +10,14 @@ RUN apt-get update && apt-get install -y nginx
 RUN apt-get -qq update && apt-get install -y varnish vim git
 
 # Add the startup script
-ADD start.sh /start.sh
+ADD src/start.sh /start.sh
 RUN chmod 0755 /start.sh
 
 # Set Configurations for varnish and nginx
 ENV VARNISH_PORT 80
 ENV VARNISH_MALLOC 100M
-ADD default.vcl /etc/varnish/default.vcl
-COPY nginx-https-proxy.conf /etc/nginx/sites-available/default
+ADD src/default.vcl /etc/varnish/default.vcl
+COPY src/nginx-https-proxy.conf /etc/nginx/sites-available/default
 
 # Expose the port and start the proxies
 EXPOSE 80
