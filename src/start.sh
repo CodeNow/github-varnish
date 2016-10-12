@@ -12,4 +12,4 @@ varnishd -f /etc/varnish/default.vcl \
   -a 0.0.0.0:${VARNISH_PORT} 
 
 # Show only Varnish errors
-varnishlog -X "Error"
+varnishlog -I "Error"
