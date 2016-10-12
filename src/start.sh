@@ -12,4 +12,6 @@ varnishd -f /etc/varnish/default.vcl \
   -a 0.0.0.0:${VARNISH_PORT}
 
 # TODO Send logging to a specific log file...
-varnishlog
+# Too noisey, need to tune.
+
+#varnishlog
