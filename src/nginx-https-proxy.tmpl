@@ -6,9 +6,9 @@ server {
   }
   listen 8000;
   location / {
-    rewrite ^/(.*) /api/v3/$1 break;
-    proxy_set_header HOST github.runnable-gamma.com;
+    #GITHUB_ENTERPRISE_REWRITE rewrite ^/(.*) /api/v3/$1 break
+    proxy_set_header HOST {GITHUB_DOMAIN};
     proxy_set_header "User-Agent" "runnable-github-proxy";
-    proxy_pass https://github.runnable-gamma.com;
+    proxy_pass {GITHUB_PROTOCOL}://{GITHUB_DOMAIN};
   }
 }
