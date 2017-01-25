@@ -17,7 +17,7 @@ RUN chmod 0755 /start.sh
 ENV VARNISH_PORT 80
 ENV VARNISH_MALLOC 100M
 ADD src/default.vcl /etc/varnish/default.vcl
-COPY src/nginx-https-proxy.conf /etc/nginx/sites-available/default
+COPY src/nginx-https-proxy.tmpl /etc/nginx/sites-available/default
 
 # Expose the port and start the proxies
 EXPOSE 80
