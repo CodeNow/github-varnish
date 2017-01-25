@@ -20,7 +20,7 @@ ADD src/default.vcl /etc/varnish/default.vcl
 COPY src/nginx-https-proxy.tmpl /etc/nginx/sites-available/default
 RUN sed -i s/{GITHUB_DOMAIN}/${GITHUB_DOMAIN}/ /etc/nginx/sites-available/default
 RUN sed -i s/{GITHUB_PROTOCOL}/${GITHUB_PROTOCOL}/ /etc/nginx/sites-available/default
-RUN if $GITHUB_DOMAIN; then sed -i 's/#GITHUB_ENTERPRISE_REWRITE //' /etc/nginx/sites-available/default; fi
+RUN if $IS_GITHUB_ENTERPRISE; then sed -i 's/#GITHUB_ENTERPRISE_REWRITE //' /etc/nginx/sites-available/default; fi
 
 # Expose the port and start the proxies
 EXPOSE 80
